@@ -1,6 +1,6 @@
 <!-- @format -->
 
--Los comanos para sbir tus cabios a github:
+-Los comandos para sbir tus cabios a github:
 
 git add .
 git commit -m "message"
