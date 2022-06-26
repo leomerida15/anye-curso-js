@@ -1,6 +1,6 @@
 /** @format */
 
-const db = [
+let db = [
 	{
 		nombre: "Candy",
 		edad: 2,
