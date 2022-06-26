@@ -6,12 +6,14 @@ git add .
 git commit -m "message"
 git push
 
--Los comando para definir tu repo o servidor remoto:
-
-git remote add :nombre_del_origen :link
-
 => nombre_del_origen: debes tener simepre un origin
 
 -Los comandos para traerte los cambios desde remoto
 
 git pull
+
+
+
+-Los comando para definir tu repo o servidor remoto:
+
+git remote add :nombre_del_origen :link

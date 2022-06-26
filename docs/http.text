@@ -1,0 +1,20 @@
+metodos:
+
+GET: se usa para traer informacion.
+
+POST: se usa para crear nuevos registros.
+
+PUT: se usa para editar un rgistro ya existnte.
+PATCH: se usa para editar solo un campo un rgistro ya existnte.
+
+DELETE: se usa para eliminar un rregistro.
+
+pates de una peticion
+
+1. method o metodos
+
+2. header: define informacion del origen, como ip,
+ locacion, tipo de respuesta, la url origen y destino.
+
+3. body: contiene informacion requeida para el servidor y 
+solo lo usan los metodos POST, PUT, PATCH. 
