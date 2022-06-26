@@ -17,3 +17,8 @@ git pull
 -Los comando para definir tu repo o servidor remoto:
 
 git remote add :nombre_del_origen :link
+
+
+- listado de commids
+
+git log --oneline
