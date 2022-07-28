@@ -18,6 +18,10 @@ git pull
 
 git remote add :nombre_del_origen :link
 
+Ejemplo 
+
+ git remote add origin https://github.com/leomerida15/anye-curso-js.git
+
 
 - listado de commids
 
