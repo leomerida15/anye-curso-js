@@ -1,59 +1,80 @@
 /** @format */
 
-const db = require("../db");
+const dataSource = require("../db");
+
+const getDogs = dataSource.getRepository(require("../db/entitys/dogs.db"))
 
 const Router = (fastify) => {
 	//
-	fastify.get("/", (request, reply) => {
-		reply.status(200).send({ mensagge: "hola mundo" });
-	});
-	//
-	fastify.get("/dogs", (request, reply) => {
-		//
-		const info = db;
-		//
-		reply.status(200).send({ mensagge: "lista de perritos", info });
-	});
-
-	fastify.post("/dogs/create", (request, reply) => {
+/*	fastify.post("/dogs/create",  (request, reply) => {
 		//
 		const newdog = request.body;
-		db.push(newdog);
-		const info = db;
+		getDogs.save(newdog)
+			.then((info) => reply.status(200).send({ mensagge: "nuevos perritos", info }))
+			.catch((error) => console.log("error",error))
+		
+	}); */
 
-		//
-		reply.status(200).send({ mensagge: "nuevos perritos", info });
+	fastify.post("/dogs/create", async (request, reply) => {
+		
+		try {
+			const newdog = request.body;
+			console.log("newdog",newdog);
+
+			const info = await getDogs.save(newdog)
+			console.log("info",info)
+
+			reply.status(200).send({ mensagge: "nuevos perritos", info });		
+				
+		} catch (error) {
+			console.log("error",error);
+		}
+	});
+	fastify.get("/dogs", async (request, reply) => {
+		
+		try {
+			
+		const info = await getDogs.find()
+			
+	
+			reply.status(200).send({ mensagge: "lista de perritos", info });		
+				
+		} catch (error) {
+			console.log("error",error);
+		}
 	});
 
-	fastify.put("/dogs/edit/:id", (request, reply) => {
+	fastify.delete("/dogs/delete/:id", async (request, reply) => {
+		
+		try {
+			
+			const id_dog = request.params.id;
+
+			await getDogs.delete({
+				id: id_dog
+			});
+
+			const info = await getDogs.find()
+
+			reply.status(200).send({ mensagge: "nueva lista de perritos", info });		
+				
+		} catch (error) {
+			console.log("error",error);
+		}
+	});
+
+	fastify.put("/dogs/edit/:id", async (request, reply) => {
 		//
 
 		const id_dog = request.params.id;
 		const new_info_dog = request.body;
 		//
 
-		db[id_dog] = { ...db[id_dog], ...new_info_dog };
+		await getDogs.update({
+			id: id_dog
+		},new_info_dog);
 
-		const info = db;
-
-		//
-		reply.status(200).send({ mensagge: "nuevos perritos", info });
-	});
-
-	fastify.delete("/dogs/delete/:id", (request, reply) => {
-		//
-
-		const id_dog = request.params.id;
-
-		//
-
-		db = db.filter((dog, index) => {
-			if (id_dog !== index) return true;
-			//
-			else return false;
-		});
-
-		const info = db;
+		const info = await getDogs.find()
 
 		//
 		reply.status(200).send({ mensagge: "nuevos perritos", info });
